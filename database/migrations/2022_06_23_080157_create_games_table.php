@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('games', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique()->notnull();
-            $table->enum('role', ['ADMIN','PLAYER','TEACHER']);
-            $table->integer('score');
-            $table->string('password');
-            $table->rememberToken();
+            $table->integer('participants');
+            $table->enum('mode' , ['SOLO' , 'PAIR' , 'TEAM']);
+            $table->boolean('session');
+
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('games');
     }
 };
