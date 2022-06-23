@@ -17,7 +17,7 @@ class AnswerFactory extends Factory
     public function definition()
     {
         return [
-            'answer' => $this->faker->realText(10),
+            'answer' => $this->faker->word(),
         ];
     }
 }

@@ -19,6 +19,7 @@ class UserFactory extends Factory
     {
         return [
             'name' => $this->faker->name(),
+            'email' => $this->faker->unique()->safeEmail(),
             'role' => $this->faker->randomElement(['PLAYER','TEACHER']),
             'score' => $this->faker->unique()->numberBetween(1,20),
             'password' =>  bcrypt('1234'),

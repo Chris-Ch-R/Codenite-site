@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
         if($response == null){
             User::create([
                 'name' => 'admin',
+                'email' => 'admin@admin.com',
                 'role' => 'ADMIN',
                 'score' => 0,
                 'remember_token' => Str::random(10),
