@@ -21,4 +21,20 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+Route::middleware(['auth'])->group(function () {
+
+    Route::get('/question', function () {
+        return view('question');
+    })->name('question');
+
+    // Route::get('question', [\App\Http\Controllers\QuestionController::class, 'create'])->name("question-collection");
+    Route::get('question/{collection}', [\App\Http\Controllers\QuestionController::class, 'qCollection'])->name("question-collection");
+    Route::get('question/{collection}/{id}', [\App\Http\Controllers\QuestionController::class, 'qData'])->name("question-data");
+    Route::get('question-add/{collection}', [\App\Http\Controllers\QuestionController::class, 'create'])->name("question-add");
+    Route::post('question/store/{collection}', [\App\Http\Controllers\QuestionController::class, 'store'])->name("question-store");
+
+
+
+
+});
 require __DIR__.'/auth.php';

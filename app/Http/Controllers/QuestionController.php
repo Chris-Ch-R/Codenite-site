@@ -22,9 +22,9 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($collection)
     {
-        //
+        return view('question-add' ,  compact('collection'));
     }
 
     /**
@@ -33,9 +33,16 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request , $collection)
     {
-        //
+        // return $request;
+        $question = Question::create([
+            'question_name' => $request->question_name,
+            'question' => $request->question,
+            'collection'=> $collection,
+        ]
+        );
+        return $question;
     }
 
     /**
@@ -81,5 +88,20 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         //
+    }
+
+    public function qCollection($collection){
+
+        $questions = Question::where('collection'  , $collection)->get();
+        $question = null;
+        return view('question-list' , compact('questions' ,'question', 'collection'));
+
+    }
+    public function qData($collection, $id){
+
+        $questions = Question::where('collection'  , $collection)->get();
+        $question = Question::where('collection'  , $collection)->where('id' , $id)->first();
+        return view('question-list' , compact('questions', 'question' , 'collection'));
+
     }
 }
