@@ -13,5 +13,6 @@ class Question extends Model
         'question_name',
         'question',
         'collection',
+        'expected_result',
     ];
 }

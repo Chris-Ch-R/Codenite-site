@@ -19,6 +19,7 @@ class QuestionFactory extends Factory
         return [
             'question_name' => $this->faker->word(),
             'question' => $this->faker->realText(100),
+            'expected_result' => $this->faker->realText(100),
             'collection' => $this->faker->randomElement(['ARRAY','LOOP']),
         ];
     }

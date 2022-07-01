@@ -15,8 +15,13 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('question_id');
             $table->string('answer');
+            $table->enum('answer_status', ['CORRECT', 'INCORRECT']);
             $table->timestamps();
+
+            $table->foreign('question_id')->references('id')->on('questions');
+
         });
     }
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('question_name');
             $table->longText('question');
+            $table->longText('expected_result');
             $table->enum('collection', ['ARRAY', 'LOOP']);
             $table->timestamps();
         });

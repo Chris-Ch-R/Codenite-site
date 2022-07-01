@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Answer;
 use App\Models\Question;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class QuestionController extends Controller
      */
     public function store(Request $request , $collection)
     {
-        // return $request;
+        return $request;
         $question = Question::create([
             'question_name' => $request->question_name,
             'question' => $request->question,
@@ -94,14 +95,20 @@ class QuestionController extends Controller
 
         $questions = Question::where('collection'  , $collection)->get();
         $question = null;
-        return view('question-list' , compact('questions' ,'question', 'collection'));
+
+        $correct_ans = null;
+        $incorrect_ans = null;
+        return view('question-list' , compact('questions' ,'question', 'collection' , 'correct_ans' , 'incorrect_ans'));
 
     }
     public function qData($collection, $id){
 
         $questions = Question::where('collection'  , $collection)->get();
         $question = Question::where('collection'  , $collection)->where('id' , $id)->first();
-        return view('question-list' , compact('questions', 'question' , 'collection'));
+
+        $correct_ans = Answer::where('question_id' , $id)->where('answer_status' , 'CORRECT')->get();
+        $incorrect_ans = Answer::where('question_id' , $id)->where('answer_status' , 'INCORRECT')->get();
+        return view('question-list' , compact('questions', 'question' , 'collection', 'correct_ans' , 'incorrect_ans'));
 
     }
 }

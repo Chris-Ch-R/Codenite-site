@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +18,10 @@ class AnswerFactory extends Factory
     public function definition()
     {
         return [
+
+            'question_id' => $this->faker->randomElement(Question::pluck('id')),
             'answer' => $this->faker->word(),
+            'answer_status' => $this->faker->randomElement(['CORRECT','INCORRECT']),
         ];
     }
 }
