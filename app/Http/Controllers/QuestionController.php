@@ -36,14 +36,35 @@ class QuestionController extends Controller
      */
     public function store(Request $request , $collection)
     {
-        return $request;
+
+        // return $request;
         $question = Question::create([
             'question_name' => $request->question_name,
             'question' => $request->question,
+            'expected_result' => $request->expected_result,
             'collection'=> $collection,
         ]
         );
-        return $question;
+        if($request->ans ){
+            foreach ($request->ans as $key => $value) {
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer' => $value,
+                    'answer_status' => 'CORRECT'
+                ]);
+            }
+        }
+        if($request->wrong_ans ){
+            foreach ($request->wrong_ans as $key => $value) {
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer' => $value,
+                    'answer_status' => 'INCORRECT'
+                ]);
+            }
+        }
+
+        return redirect()->route('question-data', [$collection , $question->id]);
     }
 
     /**
@@ -110,5 +131,11 @@ class QuestionController extends Controller
         $incorrect_ans = Answer::where('question_id' , $id)->where('answer_status' , 'INCORRECT')->get();
         return view('question-list' , compact('questions', 'question' , 'collection', 'correct_ans' , 'incorrect_ans'));
 
+    }
+
+    public function getQuestion(){
+
+        $question = Question::where('id' , 32)->first();
+        return $question;
     }
 }

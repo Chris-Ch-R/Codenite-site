@@ -19,7 +19,19 @@
                 <input class="question-input" type="text" placeholder="Question name" name="question_name">
             </div>
 
-            <textarea id="textbox" name="question"></textarea>
+            <div class="p-3">
+                <div class="mb-3">
+                    <label for="question-name" class="p-2">Question : </label>
+                </div>
+                <textarea id="textbox" name="question"></textarea>
+            </div>
+
+            <div class="p-3">
+                <div class=" mb-3">
+                    <label for="question-name" class="p-2">Expected result : </label>
+                </div>
+                <textarea id="textbox" name="expected_result"></textarea>
+            </div>
 
 
 
@@ -29,9 +41,8 @@
 
             </div>
             <hr>
-            <div onclick="addAnswerElement()" class="add-answer-button">
-                <i class="fa-solid fa-plus"></i>
-                Add
+            <div class="grid place-items-center">
+                <i class="fa fa-plus p-4 rounded-full bg-gray-300 hover:bg-gray-400 cursor-pointer hover:text-white" onclick="addAnswerElement()"></i>
             </div>
             <hr>
             <div id="wrong-ans-list" style="padding: 2rem;">
@@ -39,9 +50,8 @@
 
             </div>
             <hr>
-            <div onclick="addWorngAnswerElement()" class="add-answer-button">
-                <i class="fa-solid fa-plus"></i>
-                Add
+            <div class="grid place-items-center" >
+                <i class="fa fa-plus p-4 rounded-full bg-gray-300 hover:bg-gray-400 cursor-pointer hover:text-white" onclick="addWorngAnswerElement()"></i>
             </div>
             <hr>
 
@@ -155,4 +165,27 @@
         border-radius: .25rem;
         margin-left: .25rem
     }
+
+    .addIngredientDiv{
+    margin-top: 16px;
+    text-align: center;
+}
+.addIngredient{
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: -0.1px;
+    width: auto;
+    padding: 9px 15px;
+    border-radius: 4px;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    outline: none;
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+    border: 1px solid rgb(118, 121, 122);
+    color: rgb(118, 121, 122);
+    box-sizing: border-box;
+    display: inline-block;
+}
 </style>

@@ -46,7 +46,7 @@
             {{-- Question content --}}
             <div style="flex-grow: 2;padding: 2rem">
                 @if ($question)
-                <div style="display: grid; place-items:center;">
+                <div style="display: grid; place-items:center;" class="bg-white p-6 rounded-lg shadow-lg">
                     <h1 style="margin-bottom: 1rem;">{{$question->question_name}}</h1>
                     <div style="margin: 0 auto" style="display: grid;place-items: center;">
                         @php
@@ -60,20 +60,22 @@
 
                 @endif
             </div>
-            <div style="flex-grow: 1;flex-basis: 200px; display: flex; flex-direction: column">
-                <div style="background-color: red; flex-grow: 1">
+            <div style="flex-grow: 1;flex-basis: 200px; display: flex; flex-direction: column" class="gap-4 p-4" >
+                @if ($question)
+                <div style=" flex-grow: 0" class="p-4 rounded-lg bg-white shadow-lg">
                     <h1>Expected result: </h1>
-                    @if ($question)
 
                     <div>
-                        {{$question->expected_result}}
+                        @php
+                            echo $question->expected_result
+                        @endphp
                     </div>
-                    @endif
 
                 </div>
-                <div style="background-color: blue;flex-grow: 1">
+                @endif
+                @if ($correct_ans)
+                <div style="flex-grow: 0" class="p-4 rounded-lg bg-white shadow-lg">
                     <h1>Correct Answer: </h1>
-                    @if ($correct_ans)
 
                     @foreach ($correct_ans as $ans )
                     <div>
@@ -81,11 +83,11 @@
                     </div>
 
                     @endforeach
-                    @endif
                 </div>
-                <div style="flex-grow: 1">
+                @endif
+                @if ($incorrect_ans)
+                <div style="flex-grow: 0" class="p-4 rounded-lg bg-white shadow-lg">
                     <h1>Wrong answer: </h1>
-                    @if ($incorrect_ans)
 
                     @foreach ($incorrect_ans as $ans )
                     <div>
@@ -93,8 +95,8 @@
                     </div>
 
                     @endforeach
-                    @endif
                 </div>
+                @endif
             </div>
 
 
