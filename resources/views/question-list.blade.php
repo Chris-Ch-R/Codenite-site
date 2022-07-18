@@ -46,6 +46,12 @@
             {{-- Question content --}}
             <div style="flex-grow: 2;padding: 2rem">
                 @if ($question)
+
+                <div class="flex justify-end gap-6">
+                    <a href="{{ route('question-delete', ['id'=>$question->id]) }}">delete</a>
+                    <button>edit</button>
+
+                </div>
                 <div style="display: grid; place-items:center;" class="bg-white p-6 rounded-lg shadow-lg">
                     <h1 style="margin-bottom: 1rem;">{{$question->question_name}}</h1>
                     <div style="margin: 0 auto" style="display: grid;place-items: center;">

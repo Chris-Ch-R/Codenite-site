@@ -37,7 +37,7 @@ class QuestionController extends Controller
     public function store(Request $request , $collection)
     {
 
-        // return $request;
+        return $request;
         $question = Question::create([
             'question_name' => $request->question_name,
             'question' => $request->question,
@@ -107,9 +107,11 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Question $question)
+    public function destroy($id)
     {
-        //
+        $question = Question::find($id);
+        $question->delete();
+        return redirect()->back();
     }
 
     public function qCollection($collection){

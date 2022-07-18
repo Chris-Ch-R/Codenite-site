@@ -19,16 +19,16 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(UserSeeder::class);
         $this->call(QuestionSeeder::class);
-        $this->call(AnswerSeeder::class);
-        for($i = 0 ; $i < 10 ; $i++){
-            DB::table('answer_question')->insert(
-                [
-                    'answer_id' => Answer::select('id')->orderByRaw("RAND()")->first()->id,
-                    'question_id' => Question::select('id')->orderByRaw("RAND()")->first()->id,
-                ]
-            );
+        // $this->call(AnswerSeeder::class);
+        // for($i = 0 ; $i < 10 ; $i++){
+        //     DB::table('answer_question')->insert(
+        //         [
+        //             'answer_id' => Answer::select('id')->orderByRaw("RAND()")->first()->id,
+        //             'question_id' => Question::select('id')->orderByRaw("RAND()")->first()->id,
+        //         ]
+        //     );
 
-        }
+        // }
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([

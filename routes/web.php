@@ -32,6 +32,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('question/{collection}/{id}', [\App\Http\Controllers\QuestionController::class, 'qData'])->name("question-data");
     Route::get('question-add/{collection}', [\App\Http\Controllers\QuestionController::class, 'create'])->name("question-add");
     Route::post('question/store/{collection}', [\App\Http\Controllers\QuestionController::class, 'store'])->name("question-store");
+    Route::get('question/delete/question/{id}', [\App\Http\Controllers\QuestionController::class, 'destroy'])->name("question-delete");
 
 
 
