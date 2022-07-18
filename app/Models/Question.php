@@ -15,4 +15,9 @@ class Question extends Model
         'collection',
         'expected_result',
     ];
+
+    public function answers()
+    {
+        return $this->hasMany(Answer::class);
+    }
 }

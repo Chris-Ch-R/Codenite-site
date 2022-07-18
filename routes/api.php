@@ -20,4 +20,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('test' , [QuestionController::class , 'getQuestion'] );
+Route::get('questions' , [QuestionController::class , 'getQuestions'] );
+Route::get('question/{id}' , [QuestionController::class , 'getQuestion'] );

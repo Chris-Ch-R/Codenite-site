@@ -135,9 +135,31 @@ class QuestionController extends Controller
 
     }
 
-    public function getQuestion(){
+    public function getQuestions(){
 
-        $question = Question::where('id' , 32)->first();
+        $question = Question::with('answers')->get();
         return $question;
+    }
+    public function getQuestion($id){
+
+        $data = [];
+        $answers = [];
+        $correntAnsArr = [];
+        $question = Question::where('id', $id)->with('answers')->first();
+
+        foreach ($question->answers as $answer) {
+            array_push($answers , $answer->answer);
+            if($answer->answer_status == "CORRECT"){
+                array_push($correntAnsArr , $answer->answer);
+
+            }
+        }
+        $data['maps'][] = [
+            'problem' => $question->question,
+            'result' => $question->expected_result,
+            "itemArr" => $answers,
+            "correntAnsArr" => $correntAnsArr
+        ];
+        return $data;
     }
 }

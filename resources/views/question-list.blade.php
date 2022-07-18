@@ -59,6 +59,7 @@
                              $html = $question->question;
                              echo $html;
                         @endphp
+                        {{-- {!!$question->question!!} --}}
                     </div>
 
                 </div>
