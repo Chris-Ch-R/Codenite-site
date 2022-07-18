@@ -49,7 +49,7 @@
 
                 <div class="flex justify-end gap-6">
                     <a href="{{ route('question-delete', ['id'=>$question->id]) }}">delete</a>
-                    <button>edit</button>
+                    <a href="{{ route('question-edit', $question) }}">edit</a>
 
                 </div>
                 <div style="display: grid; place-items:center;" class="bg-white p-6 rounded-lg shadow-lg">

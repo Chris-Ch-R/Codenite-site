@@ -84,9 +84,15 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function edit(Question $question)
+    public function edit($id)
     {
         //
+        $question = Question::where('id',$id)->with('answers')->first();
+        $collection = $question->collection;
+        // return $question;
+        // $collection = $question->
+        return view('question-edit' ,  compact('question' , 'collection'));
+
     }
 
     /**
@@ -96,8 +102,38 @@ class QuestionController extends Controller
      * @param  \App\Models\Question  $question
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Question $question)
+    public function update(Request $request, $id)
     {
+        $question = Question::where('id' , $id)->first();
+        $question->question_name = $request->question_name;
+        $question->question = $request->question;
+        $question->expected_result = $request->expected_result;
+
+        $oldAns = Answer::where('question_id' , $question->id)->delete();
+
+        if($request->ans ){
+            foreach ($request->ans as $key => $value) {
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer' => $value,
+                    'answer_status' => 'CORRECT'
+                ]);
+            }
+        }
+        if($request->wrong_ans ){
+            foreach ($request->wrong_ans as $key => $value) {
+                Answer::create([
+                    'question_id' => $question->id,
+                    'answer' => $value,
+                    'answer_status' => 'INCORRECT'
+                ]);
+            }
+        }
+        $question->save();
+
+        
+        return redirect()->route('question-data', [$question->collection , $question->id]);
+
         //
     }
 
